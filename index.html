@@ -3,193 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CKR Premium Panel</title>
+    <title>CKR Secure Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        * { -webkit-tap-highlight-color: transparent; }
+        * { -webkit-tap-highlight-color: transparent; outline: none; }
         
         body {
             background: #000;
-            background-image: radial-gradient(circle at 50% -20%, #1a2a4a, #000);
+            background-image: radial-gradient(circle at center, #1a2332, #000);
             color: #fff;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-            min-height: 100vh;
             margin: 0;
             display: flex;
             justify-content: center;
+            min-height: 100vh;
         }
 
         .app-container {
             width: 100%;
-            max-width: 440px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
+            max-width: 380px;
+            padding: 20px;
         }
 
-        /* Large Premium Glass Box */
-        .glass-box {
+        /* Standard Glass Style for All Elements */
+        .glass-element {
             background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 35px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-radius: 22px;
+            transition: 0.3s ease;
         }
 
-        .input-premium {
+        .input-glass {
             width: 100%;
             background: rgba(255, 255, 255, 0.08) !important;
             border: 1px solid rgba(255, 255, 255, 0.05) !important;
             color: #fff !important;
-            padding: 18px;
-            border-radius: 20px;
-            font-size: 17px;
-            margin-bottom: 15px;
-            outline: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 14px;
+            margin-bottom: 10px;
             text-align: center;
-            transition: 0.3s;
-        }
-
-        .input-premium:focus {
-            background: rgba(255, 255, 255, 0.12) !important;
-            border-color: rgba(255, 255, 255, 0.2) !important;
         }
 
         .btn-ios {
             background: #ffffff;
             color: #000;
             font-weight: 700;
-            font-size: 16px;
-            padding: 18px;
-            border-radius: 20px;
+            font-size: 14px;
+            padding: 14px;
+            border-radius: 14px;
             width: 100%;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+            transition: 0.2s;
+            cursor: pointer;
         }
 
-        .btn-ios:active {
-            transform: scale(0.96);
-            opacity: 0.8;
-        }
+        .btn-ios:active { transform: scale(0.96); opacity: 0.9; }
 
-        /* Vertical Links */
+        /* Links List - Same Style */
         .link-row {
-            background: rgba(255, 255, 255, 0.07);
-            padding: 22px 28px;
-            border-radius: 25px;
-            margin-bottom: 15px;
+            padding: 18px 24px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             text-decoration: none;
+        }
+
+        .link-row:active { background: rgba(255, 255, 255, 0.12); }
+
+        .link-name { font-size: 15px; font-weight: 500; color: #f0f0f0; }
+
+        .del-btn {
+            color: rgba(255, 69, 58, 0.8);
+            font-size: 18px;
+            margin-left: 12px;
+            cursor: pointer;
+        }
+
+        /* Universal Custom Glass Modal */
+        #global-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
             transition: 0.3s;
         }
 
-        .link-row:active {
-            background: rgba(255, 255, 255, 0.15);
-            transform: scale(0.98);
-        }
+        #global-modal.active { opacity: 1; visibility: visible; }
 
-        .link-label {
-            font-size: 17px;
-            font-weight: 500;
-            letter-spacing: -0.3px;
-        }
-
-        .hidden { display: none; }
-
-        .admin-title {
-            font-size: 12px;
-            font-weight: 800;
-            color: rgba(255,255,255,0.4);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
+        .modal-card {
+            width: 85%;
+            max-width: 300px;
+            padding: 25px;
             text-align: center;
+            transform: scale(0.8);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
+        #global-modal.active .modal-card { transform: scale(1); }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <div class="pt-10 pb-6 text-center">
-            <h1 class="text-4xl font-extrabold tracking-tight">Cloud Hub</h1>
-            <p class="text-gray-500 text-sm mt-2">Private Access Only</p>
+        <div class="text-center py-8">
+            <h1 class="text-2xl font-bold tracking-tighter text-white">CKR PRO</h1>
+            <p class="text-[10px] text-gray-500 uppercase tracking-[4px] mt-1">Cloud Console</p>
         </div>
 
-        <div id="admin-module" class="glass-box">
-            <div id="lock-screen">
-                <p class="admin-title">Security Key Required</p>
-                <input type="password" id="access-code" class="input-premium" placeholder="••••••">
-                <button onclick="unlock()" class="btn-ios">Authorize</button>
+        <div class="glass-element p-5 mb-8">
+            <div id="auth-ui">
+                <input type="password" id="pass" class="input-glass" placeholder="Access Key">
+                <button onclick="login()" class="btn-ios">Unlock Console</button>
             </div>
 
-            <div id="dashboard" class="hidden">
-                <p class="admin-title text-blue-400">Management Console</p>
-                <input type="text" id="site-name" class="input-premium" placeholder="Link Label">
-                <input type="url" id="site-url" class="input-premium" placeholder="Target URL">
-                <button onclick="saveLink()" class="btn-ios !bg-blue-600 !text-white">Add to Cloud</button>
-                <button onclick="wipe()" class="w-full mt-4 text-[11px] text-red-500 font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition">Reset Database</button>
+            <div id="admin-ui" class="hidden">
+                <input type="text" id="ln" class="input-glass" placeholder="Label">
+                <input type="url" id="lu" class="input-glass" placeholder="Link URL">
+                <button onclick="save()" class="btn-ios !bg-blue-600 !text-white">Add Link</button>
+                <button onclick="logout()" class="w-full mt-3 text-[10px] text-gray-500 font-bold uppercase tracking-widest">Logout</button>
             </div>
         </div>
 
-        <div id="links-container">
+        <div id="list"></div>
+    </div>
+
+    <div id="global-modal">
+        <div class="modal-card glass-element">
+            <div id="m-icon" class="text-3xl mb-3"></div>
+            <h3 id="m-title" class="text-md font-bold mb-1"></h3>
+            <p id="m-desc" class="text-xs text-gray-400 mb-5"></p>
+            
+            <div id="m-input-box" class="hidden">
+                <input type="password" id="m-pass" class="input-glass" placeholder="Verify Password">
             </div>
+
+            <div class="flex gap-4" id="m-btns"></div>
+        </div>
     </div>
 
     <script>
-        const PASS = "ckr";
+        const KEY = "ckr";
+        let isAuth = false;
+        let targetIdx = null;
 
-        const updateUI = () => {
-            const container = document.getElementById('links-container');
-            const data = JSON.parse(localStorage.getItem('ckr_pro_links') || '[]');
-            
-            if(data.length === 0) {
-                container.innerHTML = `<div class="text-center py-10 text-gray-700 font-medium">No active connections found.</div>`;
-            } else {
-                container.innerHTML = data.map(link => `
-                    <a href="${link.url}" target="_blank" class="link-row">
-                        <span class="link-label">${link.name}</span>
-                        <i class="fa-solid fa-chevron-right text-gray-600 text-sm"></i>
+        const render = () => {
+            const container = document.getElementById('list');
+            const links = JSON.parse(localStorage.getItem('ckr_glass_v1') || '[]');
+            if(links.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-600 text-[11px] py-10">NO CONNECTIONS</p>`;
+                return;
+            }
+            container.innerHTML = links.map((link, i) => `
+                <div class="flex items-center">
+                    <a href="${link.url}" target="_blank" class="glass-element link-row flex-grow">
+                        <span class="link-name">${link.name}</span>
+                        <i class="fas fa-chevron-right text-[10px] text-gray-600"></i>
                     </a>
-                `).join('');
-            }
+                    ${isAuth ? `<i class="fa-solid fa-circle-minus del-btn" onclick="askDelete(${i})"></i>` : ''}
+                </div>
+            `).join('');
         };
 
-        const unlock = () => {
-            if(document.getElementById('access-code').value === PASS) {
-                document.getElementById('lock-screen').classList.add('hidden');
-                document.getElementById('dashboard').classList.remove('hidden');
+        const showModal = (mode, title, desc, onConfirm = null) => {
+            const m = document.getElementById('global-modal');
+            document.getElementById('m-title').innerText = title;
+            document.getElementById('m-desc').innerText = desc;
+            const inputArea = document.getElementById('m-input-box');
+            const btnArea = document.getElementById('m-btns');
+            const iconArea = document.getElementById('m-icon');
+
+            inputArea.classList.add('hidden');
+            btnArea.innerHTML = '';
+
+            if(mode === 'error') {
+                iconArea.innerHTML = `<i class="fas fa-circle-exclamation text-red-500"></i>`;
+                btnArea.innerHTML = `<button onclick="closeModal()" class="btn-ios">OK</button>`;
+            } else if(mode === 'confirm_delete') {
+                iconArea.innerHTML = `<i class="fas fa-key text-blue-500"></i>`;
+                inputArea.classList.remove('hidden');
+                btnArea.innerHTML = `
+                    <button onclick="closeModal()" class="flex-1 text-gray-400 text-xs font-bold">Cancel</button>
+                    <button id="confirm-btn" class="flex-1 text-red-500 text-xs font-bold">Delete</button>
+                `;
+                document.getElementById('confirm-btn').onclick = onConfirm;
+            }
+            m.classList.add('active');
+        };
+
+        const closeModal = () => {
+            document.getElementById('global-modal').classList.remove('active');
+            document.getElementById('m-pass').value = '';
+        };
+
+        const login = () => {
+            if(document.getElementById('pass').value === KEY) {
+                isAuth = true;
+                document.getElementById('auth-ui').classList.add('hidden');
+                document.getElementById('admin-ui').classList.remove('hidden');
+                render();
             } else {
-                alert("Incorrect Access Key");
+                showModal('error', 'Denied', 'Incorrect Security Key');
             }
         };
 
-        const saveLink = () => {
-            const n = document.getElementById('site-name').value;
-            const u = document.getElementById('site-url').value;
+        const askDelete = (idx) => {
+            targetIdx = idx;
+            showModal('confirm_delete', 'Confirm Action', 'Verification required to delete.', () => {
+                const p = document.getElementById('m-pass').value;
+                if(p === KEY) {
+                    let links = JSON.parse(localStorage.getItem('ckr_glass_v1') || '[]');
+                    links.splice(targetIdx, 1);
+                    localStorage.setItem('ckr_glass_v1', JSON.stringify(links));
+                    closeModal();
+                    render();
+                } else {
+                    closeModal();
+                    setTimeout(() => showModal('error', 'Wrong Password', 'Permission Denied.'), 400);
+                }
+            });
+        };
+
+        const save = () => {
+            const n = document.getElementById('ln').value;
+            const u = document.getElementById('lu').value;
             if(n && u) {
-                const data = JSON.parse(localStorage.getItem('ckr_pro_links') || '[]');
-                data.push({name: n, url: u});
-                localStorage.setItem('ckr_pro_links', JSON.stringify(data));
-                document.getElementById('site-name').value = '';
-                document.getElementById('site-url').value = '';
-                updateUI();
+                const links = JSON.parse(localStorage.getItem('ckr_glass_v1') || '[]');
+                links.push({name: n, url: u});
+                localStorage.setItem('ckr_glass_v1', JSON.stringify(links));
+                document.getElementById('ln').value = '';
+                document.getElementById('lu').value = '';
+                render();
             }
         };
 
-        const wipe = () => {
-            if(confirm("Confirm Wipe?")) {
-                localStorage.removeItem('ckr_pro_links');
-                updateUI();
-            }
+        const logout = () => {
+            isAuth = false;
+            document.getElementById('pass').value = '';
+            document.getElementById('auth-ui').classList.remove('hidden');
+            document.getElementById('admin-ui').classList.add('hidden');
+            render();
         };
 
-        window.onload = updateUI;
+        window.onload = render;
     </script>
 </body>
 </html>
