@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CKR Secure Hub</title>
+    <title>CKR PRO Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -26,7 +26,7 @@
             padding: 20px;
         }
 
-        /* Standard Glass Style for All Elements */
+        /* Glass Look Style */
         .glass-element {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(25px);
@@ -36,227 +36,62 @@
             transition: 0.3s ease;
         }
 
-        .input-glass {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.08) !important;
-            border: 1px solid rgba(255, 255, 255, 0.05) !important;
-            color: #fff !important;
-            padding: 14px;
-            border-radius: 14px;
-            font-size: 14px;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .btn-ios {
-            background: #ffffff;
-            color: #000;
-            font-weight: 700;
-            font-size: 14px;
-            padding: 14px;
-            border-radius: 14px;
-            width: 100%;
-            transition: 0.2s;
-            cursor: pointer;
-        }
-
-        .btn-ios:active { transform: scale(0.96); opacity: 0.9; }
-
-        /* Links List - Same Style */
         .link-row {
-            padding: 18px 24px;
-            margin-bottom: 12px;
+            padding: 20px 24px;
+            margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             text-decoration: none;
         }
 
-        .link-row:active { background: rgba(255, 255, 255, 0.12); }
-
-        .link-name { font-size: 15px; font-weight: 500; color: #f0f0f0; }
-
-        .del-btn {
-            color: rgba(255, 69, 58, 0.8);
-            font-size: 18px;
-            margin-left: 12px;
-            cursor: pointer;
+        .link-row:active {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(0.98);
         }
 
-        /* Universal Custom Glass Modal */
-        #global-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s;
+        .link-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: #f0f0f0;
+            letter-spacing: 0.5px;
         }
 
-        #global-modal.active { opacity: 1; visibility: visible; }
-
-        .modal-card {
-            width: 85%;
-            max-width: 300px;
-            padding: 25px;
-            text-align: center;
-            transform: scale(0.8);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .icon-box {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
         }
-
-        #global-modal.active .modal-card { transform: scale(1); }
-
-        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <div class="text-center py-8">
-            <h1 class="text-2xl font-bold tracking-tighter text-white">CKR PRO</h1>
-            <p class="text-[10px] text-gray-500 uppercase tracking-[4px] mt-1">Cloud Console</p>
+        <div class="text-center py-12">
+            <h1 class="text-3xl font-bold tracking-tighter text-white">CKR PRO</h1>
+            <p class="text-[10px] text-blue-500 uppercase tracking-[5px] mt-2 font-bold">Cloud Repository</p>
         </div>
 
-        <div class="glass-element p-5 mb-8">
-            <div id="auth-ui">
-                <input type="password" id="pass" class="input-glass" placeholder="Access Key">
-                <button onclick="login()" class="btn-ios">Unlock Console</button>
-            </div>
+        <div id="list">
+            <a href="https://ckrpro-linkshortner.onrender.com/" target="_blank" class="glass-element link-row block">
+                <span class="link-name">Link Shortner</span>
+                <i class="fas fa-chevron-right icon-box"></i>
+            </a>
 
-            <div id="admin-ui" class="hidden">
-                <input type="text" id="ln" class="input-glass" placeholder="Label">
-                <input type="url" id="lu" class="input-glass" placeholder="Link URL">
-                <button onclick="save()" class="btn-ios !bg-blue-600 !text-white">Add Link</button>
-                <button onclick="logout()" class="w-full mt-3 text-[10px] text-gray-500 font-bold uppercase tracking-widest">Logout</button>
-            </div>
+            <a href="https://ckrpro-get-accestoken.onrender.com/" target="_blank" class="glass-element link-row block">
+                <span class="link-name">Convert Access Token</span>
+                <i class="fas fa-chevron-right icon-box"></i>
+            </a>
+
+            <a href="https://get-access-token-qax3.onrender.com" target="_blank" class="glass-element link-row block">
+                <span class="link-name">Get EAT Token</span>
+                <i class="fas fa-chevron-right icon-box"></i>
+            </a>
         </div>
 
-        <div id="list"></div>
-    </div>
-
-    <div id="global-modal">
-        <div class="modal-card glass-element">
-            <div id="m-icon" class="text-3xl mb-3"></div>
-            <h3 id="m-title" class="text-md font-bold mb-1"></h3>
-            <p id="m-desc" class="text-xs text-gray-400 mb-5"></p>
-            
-            <div id="m-input-box" class="hidden">
-                <input type="password" id="m-pass" class="input-glass" placeholder="Verify Password">
-            </div>
-
-            <div class="flex gap-4" id="m-btns"></div>
+        <div class="text-center mt-20">
+            <p class="text-[9px] text-gray-600 uppercase tracking-widest">Securely Hosted on Cloud</p>
         </div>
     </div>
 
-    <script>
-        const KEY = "ckr";
-        let isAuth = false;
-        let targetIdx = null;
-
-        const render = () => {
-            const container = document.getElementById('list');
-            const links = JSON.parse(localStorage.getItem('ckr_glass_v1') || '[]');
-            if(links.length === 0) {
-                container.innerHTML = `<p class="text-center text-gray-600 text-[11px] py-10">NO CONNECTIONS</p>`;
-                return;
-            }
-            container.innerHTML = links.map((link, i) => `
-                <div class="flex items-center">
-                    <a href="${link.url}" target="_blank" class="glass-element link-row flex-grow">
-                        <span class="link-name">${link.name}</span>
-                        <i class="fas fa-chevron-right text-[10px] text-gray-600"></i>
-                    </a>
-                    ${isAuth ? `<i class="fa-solid fa-circle-minus del-btn" onclick="askDelete(${i})"></i>` : ''}
-                </div>
-            `).join('');
-        };
-
-        const showModal = (mode, title, desc, onConfirm = null) => {
-            const m = document.getElementById('global-modal');
-            document.getElementById('m-title').innerText = title;
-            document.getElementById('m-desc').innerText = desc;
-            const inputArea = document.getElementById('m-input-box');
-            const btnArea = document.getElementById('m-btns');
-            const iconArea = document.getElementById('m-icon');
-
-            inputArea.classList.add('hidden');
-            btnArea.innerHTML = '';
-
-            if(mode === 'error') {
-                iconArea.innerHTML = `<i class="fas fa-circle-exclamation text-red-500"></i>`;
-                btnArea.innerHTML = `<button onclick="closeModal()" class="btn-ios">OK</button>`;
-            } else if(mode === 'confirm_delete') {
-                iconArea.innerHTML = `<i class="fas fa-key text-blue-500"></i>`;
-                inputArea.classList.remove('hidden');
-                btnArea.innerHTML = `
-                    <button onclick="closeModal()" class="flex-1 text-gray-400 text-xs font-bold">Cancel</button>
-                    <button id="confirm-btn" class="flex-1 text-red-500 text-xs font-bold">Delete</button>
-                `;
-                document.getElementById('confirm-btn').onclick = onConfirm;
-            }
-            m.classList.add('active');
-        };
-
-        const closeModal = () => {
-            document.getElementById('global-modal').classList.remove('active');
-            document.getElementById('m-pass').value = '';
-        };
-
-        const login = () => {
-            if(document.getElementById('pass').value === KEY) {
-                isAuth = true;
-                document.getElementById('auth-ui').classList.add('hidden');
-                document.getElementById('admin-ui').classList.remove('hidden');
-                render();
-            } else {
-                showModal('error', 'Denied', 'Incorrect Security Key');
-            }
-        };
-
-        const askDelete = (idx) => {
-            targetIdx = idx;
-            showModal('confirm_delete', 'Confirm Action', 'Verification required to delete.', () => {
-                const p = document.getElementById('m-pass').value;
-                if(p === KEY) {
-                    let links = JSON.parse(localStorage.getItem('ckr_glass_v1') || '[]');
-                    links.splice(targetIdx, 1);
-                    localStorage.setItem('ckr_glass_v1', JSON.stringify(links));
-                    closeModal();
-                    render();
-                } else {
-                    closeModal();
-                    setTimeout(() => showModal('error', 'Wrong Password', 'Permission Denied.'), 400);
-                }
-            });
-        };
-
-        const save = () => {
-            const n = document.getElementById('ln').value;
-            const u = document.getElementById('lu').value;
-            if(n && u) {
-                const links = JSON.parse(localStorage.getItem('ckr_glass_v1') || '[]');
-                links.push({name: n, url: u});
-                localStorage.setItem('ckr_glass_v1', JSON.stringify(links));
-                document.getElementById('ln').value = '';
-                document.getElementById('lu').value = '';
-                render();
-            }
-        };
-
-        const logout = () => {
-            isAuth = false;
-            document.getElementById('pass').value = '';
-            document.getElementById('auth-ui').classList.remove('hidden');
-            document.getElementById('admin-ui').classList.add('hidden');
-            render();
-        };
-
-        window.onload = render;
-    </script>
 </body>
 </html>
