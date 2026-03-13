@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CKR Premium Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background: #000;
+            background-image: radial-gradient(circle at 50% -20%, #1a2a4a, #000);
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 440px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Large Premium Glass Box */
+        .glass-box {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 35px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .input-premium {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            color: #fff !important;
+            padding: 18px;
+            border-radius: 20px;
+            font-size: 17px;
+            margin-bottom: 15px;
+            outline: none;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .input-premium:focus {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .btn-ios {
+            background: #ffffff;
+            color: #000;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 18px;
+            border-radius: 20px;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+        }
+
+        .btn-ios:active {
+            transform: scale(0.96);
+            opacity: 0.8;
+        }
+
+        /* Vertical Links */
+        .link-row {
+            background: rgba(255, 255, 255, 0.07);
+            padding: 22px 28px;
+            border-radius: 25px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .link-row:active {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(0.98);
+        }
+
+        .link-label {
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+        }
+
+        .hidden { display: none; }
+
+        .admin-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="pt-10 pb-6 text-center">
+            <h1 class="text-4xl font-extrabold tracking-tight">Cloud Hub</h1>
+            <p class="text-gray-500 text-sm mt-2">Private Access Only</p>
+        </div>
+
+        <div id="admin-module" class="glass-box">
+            <div id="lock-screen">
+                <p class="admin-title">Security Key Required</p>
+                <input type="password" id="access-code" class="input-premium" placeholder="••••••">
+                <button onclick="unlock()" class="btn-ios">Authorize</button>
+            </div>
+
+            <div id="dashboard" class="hidden">
+                <p class="admin-title text-blue-400">Management Console</p>
+                <input type="text" id="site-name" class="input-premium" placeholder="Link Label">
+                <input type="url" id="site-url" class="input-premium" placeholder="Target URL">
+                <button onclick="saveLink()" class="btn-ios !bg-blue-600 !text-white">Add to Cloud</button>
+                <button onclick="wipe()" class="w-full mt-4 text-[11px] text-red-500 font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition">Reset Database</button>
+            </div>
+        </div>
+
+        <div id="links-container">
+            </div>
+    </div>
+
+    <script>
+        const PASS = "ckr";
+
+        const updateUI = () => {
+            const container = document.getElementById('links-container');
+            const data = JSON.parse(localStorage.getItem('ckr_pro_links') || '[]');
+            
+            if(data.length === 0) {
+                container.innerHTML = `<div class="text-center py-10 text-gray-700 font-medium">No active connections found.</div>`;
+            } else {
+                container.innerHTML = data.map(link => `
+                    <a href="${link.url}" target="_blank" class="link-row">
+                        <span class="link-label">${link.name}</span>
+                        <i class="fa-solid fa-chevron-right text-gray-600 text-sm"></i>
+                    </a>
+                `).join('');
+            }
+        };
+
+        const unlock = () => {
+            if(document.getElementById('access-code').value === PASS) {
+                document.getElementById('lock-screen').classList.add('hidden');
+                document.getElementById('dashboard').classList.remove('hidden');
+            } else {
+                alert("Incorrect Access Key");
+            }
+        };
+
+        const saveLink = () => {
+            const n = document.getElementById('site-name').value;
+            const u = document.getElementById('site-url').value;
+            if(n && u) {
+                const data = JSON.parse(localStorage.getItem('ckr_pro_links') || '[]');
+                data.push({name: n, url: u});
+                localStorage.setItem('ckr_pro_links', JSON.stringify(data));
+                document.getElementById('site-name').value = '';
+                document.getElementById('site-url').value = '';
+                updateUI();
+            }
+        };
+
+        const wipe = () => {
+            if(confirm("Confirm Wipe?")) {
+                localStorage.removeItem('ckr_pro_links');
+                updateUI();
+            }
+        };
+
+        window.onload = updateUI;
+    </script>
+</body>
+</html>
