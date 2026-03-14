@@ -26,19 +26,19 @@
             padding: 20px;
         }
 
-        /* Glass Look Style */
+        /* Pure Glass Effect */
         .glass-element {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 22px;
-            transition: 0.3s ease;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .link-row {
             padding: 20px 24px;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -47,26 +47,26 @@
 
         .link-row:active {
             background: rgba(255, 255, 255, 0.12);
-            transform: scale(0.98);
+            transform: scale(0.97);
         }
 
         .link-name {
             font-size: 15px;
             font-weight: 500;
             color: #f0f0f0;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         .icon-box {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 12px;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 11px;
         }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <div class="text-center py-12">
+        <div class="text-center py-10">
             <h1 class="text-3xl font-bold tracking-tighter text-white">CKR PRO</h1>
             <p class="text-[10px] text-blue-500 uppercase tracking-[5px] mt-2 font-bold">Cloud Repository</p>
         </div>
@@ -86,10 +86,20 @@
                 <span class="link-name">Get EAT Token</span>
                 <i class="fas fa-chevron-right icon-box"></i>
             </a>
+
+            <a href="https://bio-changer-access-token.onrender.com" target="_blank" class="glass-element link-row block">
+                <span class="link-name">Bio Changer</span>
+                <i class="fas fa-chevron-right icon-box"></i>
+            </a>
+
+            <a href="https://visit-web-ff.onrender.com" target="_blank" class="glass-element link-row block">
+                <span class="link-name">Free Fire Visitors</span>
+                <i class="fas fa-chevron-right icon-box"></i>
+            </a>
         </div>
 
-        <div class="text-center mt-20">
-            <p class="text-[9px] text-gray-600 uppercase tracking-widest">Securely Hosted on Cloud</p>
+        <div class="text-center mt-16 opacity-40">
+            <p class="text-[9px] text-gray-500 uppercase tracking-widest">v5.0 Stable • No Database Required</p>
         </div>
     </div>
 
