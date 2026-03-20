@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CKR PRO HUB</title>
+    <title>CKR UNKNOWN</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -11,138 +11,158 @@
         
         body {
             background: #000;
-            background-image: radial-gradient(circle at center, #1e293b, #000);
+            background-image: radial-gradient(circle at center, #111827, #000);
             color: #fff;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
             margin: 0;
+            height: 100vh;
             display: flex;
-            align-items: center; 
-            justify-content: center; 
-            min-height: 100vh;
-            overflow-x: hidden;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        .app-container {
-            width: 92%;
-            max-width: 360px;
-            text-align: center;
-            padding: 20px 0;
+        /* --- COMPACT LOGIN SCREEN --- */
+        #login-screen {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.6s ease-in-out;
         }
 
-        /* Standard Glass Box */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 35px;
-            padding: 18px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-        }
-
-        .header-section {
-            padding: 20px 0 25px 0;
-        }
-
-        .brand-name {
-            font-size: 24px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            background: linear-gradient(to bottom, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Unified Link Style */
-        .link-row {
+        .login-card {
             background: rgba(255, 255, 255, 0.05);
-            margin-bottom: 10px;
-            padding: 18px 22px;
-            border-radius: 22px;
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-radius: 35px; /* No Border Line */
+            padding: 30px 25px;
+            width: 80%;
+            max-width: 300px; /* Sano size */
+            text-align: center;
+        }
+
+        .pass-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            border: none; /* No Border */
+            border-radius: 18px;
+            padding: 15px;
+            color: #fff;
+            text-align: center;
+            font-size: 16px;
+            letter-spacing: 5px;
+            margin-top: 20px;
+        }
+
+        .unlock-btn {
+            background: #3b82f6; /* Premium Blue */
+            color: #fff;
+            font-weight: 700;
+            width: 100%;
+            padding: 14px;
+            border-radius: 18px;
+            margin-top: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .unlock-btn:active { transform: scale(0.94); opacity: 0.9; }
+
+        /* --- MAIN CONTENT --- */
+        #main-content {
+            display: none;
+            width: 90%;
+            max-width: 350px;
+            opacity: 0;
+            transition: 0.8s ease;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(30px);
+            border-radius: 40px; /* No Border */
+            padding: 10px;
+        }
+
+        .link-item {
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 8px;
+            padding: 16px 20px;
+            border-radius: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             text-decoration: none;
-            transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 1px solid rgba(255, 255, 255, 0.02);
+            transition: 0.3s;
         }
 
-        .link-row:active {
-            transform: scale(0.96);
-            background: rgba(255, 255, 255, 0.1);
-        }
+        .link-item:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.1); }
 
-        .link-text {
-            font-size: 14px;
-            font-weight: 600;
-            color: #f1f5f9;
-        }
+        .link-title { font-size: 14px; font-weight: 500; color: #cbd5e1; }
+        .chevron { font-size: 10px; color: rgba(255, 255, 255, 0.1); }
 
-        .chevron-icon {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.15);
-        }
-
-        .footer-text {
-            margin-top: 25px;
-            font-size: 9px;
-            color: #475569;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
+        .hidden-screen { opacity: 0; visibility: hidden; pointer-events: none; transform: scale(1.1); }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <div class="glass-panel">
+    <div id="login-screen">
+        <div class="login-card">
+            <h2 class="text-lg font-bold tracking-tight">Access Key</h2>
+            <p class="text-[9px] text-gray-500 uppercase tracking-[3px] mt-1">Encrypted Hub</p>
             
-            <div class="header-section">
-                <h1 class="brand-name">CKR UNKNOWN</h1>
-                <p class="text-[9px] text-blue-500 font-bold tracking-[5px] mt-1 uppercase">Cloud Repository</p>
-            </div>
-
-            <div class="links-list">
-                <a href="https://ff-info-tool.onrender.com" target="_blank" class="link-row">
-                    <span class="link-text">FF Info Tool</span>
-                    <i class="fas fa-chevron-right chevron-icon"></i>
-                </a>
-
-                <a href="https://tinyurl.com/ckrunknown" target="_blank" class="link-row">
-                    <span class="link-text">FF Free Likes</span>
-                    <i class="fas fa-chevron-right chevron-icon"></i>
-                </a>
-
-                <a href="https://ckrpro-linkshortner.onrender.com/" target="_blank" class="link-row">
-                    <span class="link-text">Link Shortner</span>
-                    <i class="fas fa-chevron-right chevron-icon"></i>
-                </a>
-
-                <a href="https://ckrpro-get-accestoken.onrender.com/" target="_blank" class="link-row">
-                    <span class="link-text">Convert Access Token</span>
-                    <i class="fas fa-chevron-right chevron-icon"></i>
-                </a>
-
-                <a href="https://get-access-token-qax3.onrender.com" target="_blank" class="link-row">
-                    <span class="link-text">Get EAT Token</span>
-                    <i class="fas fa-chevron-right chevron-icon"></i>
-                </a>
-
-                <a href="https://bio-changer-access-token.onrender.com" target="_blank" class="link-row">
-                    <span class="link-text">Bio Changer</span>
-                    <i class="fas fa-chevron-right chevron-icon"></i>
-                </a>
-
-                <a href="https://visit-web-ff.onrender.com" target="_blank" class="link-row">
-                    <span class="link-text">FF Visitors</span>
-                    <i class="fas fa-chevron-right chevron-icon"></i>
-                </a>
-            </div>
-
+            <input type="password" id="passInput" class="pass-field" placeholder="••••">
+            <button onclick="checkAccess()" class="unlock-btn">Unlock</button>
+            <p id="error" class="text-red-500 text-[10px] mt-3 opacity-0 transition-opacity">Wrong Password</p>
         </div>
-
-        <p class="footer-text"> </p>
     </div>
 
+    <div id="main-content">
+        <div class="glass-panel">
+            <div class="text-center py-6">
+                <h1 class="text-2xl font-black tracking-tight text-white uppercase">CKR UNKNOWN</h1>
+                <p class="text-[8px] text-blue-500 font-bold tracking-[5px] mt-1 uppercase">Cloud Repository</p>
+            </div>
+
+            <div class="links-container">
+                <a href="https://ffban-ckrpro-1.onrender.com" target="_blank" class="link-item"><span class="link-title text-red-400">Access Token Ban</span><i class="fas fa-chevron-right chevron"></i></a>
+                <a href="https://ff-info-tool.onrender.com" target="_blank" class="link-item"><span class="link-title">FF Info Tool</span><i class="fas fa-chevron-right chevron"></i></a>
+                <a href="https://tinyurl.com/ckrunknown" target="_blank" class="link-item"><span class="link-title">FF Free Likes</span><i class="fas fa-chevron-right chevron"></i></a>
+                <a href="https://ckrpro-linkshortner.onrender.com/" target="_blank" class="link-item"><span class="link-title">Link Shortner</span><i class="fas fa-chevron-right chevron"></i></a>
+                <a href="https://ckrpro-get-accestoken.onrender.com/" target="_blank" class="link-item"><span class="link-title">Convert Access Token</span><i class="fas fa-chevron-right chevron"></i></a>
+                <a href="https://get-access-token-qax3.onrender.com" target="_blank" class="link-item"><span class="link-title">Get EAT Token</span><i class="fas fa-chevron-right chevron"></i></a>
+                <a href="https://bio-changer-access-token.onrender.com" target="_blank" class="link-item"><span class="link-title">Bio Changer</span><i class="fas fa-chevron-right chevron"></i></a>
+                <a href="https://visit-web-ff.onrender.com" target="_blank" class="link-item"><span class="link-title">FF Visitors</span><i class="fas fa-chevron-right chevron"></i></a>
+            </div>
+        </div>
+        <p class="text-center mt-6 text-[8px] text-gray-800 tracking-[3px] uppercase">CKRPRO ULTIMATE</p>
+    </div>
+
+    <script>
+        function checkAccess() {
+            const input = document.getElementById('passInput').value;
+            const error = document.getElementById('error');
+            const loginScreen = document.getElementById('login-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            if (input === "ckrpro") {
+                loginScreen.classList.add('hidden-screen');
+                mainContent.style.display = 'block';
+                setTimeout(() => { mainContent.style.opacity = '1'; }, 100);
+            } else {
+                error.style.opacity = '1';
+                document.getElementById('passInput').value = '';
+                setTimeout(() => { error.style.opacity = '0'; }, 2000);
+            }
+        }
+
+        document.getElementById('passInput').addEventListener("keypress", (e) => {
+            if (e.key === "Enter") checkAccess();
+        });
+    </script>
 </body>
 </html>
