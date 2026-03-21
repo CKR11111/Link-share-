@@ -31,6 +31,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column; /* Stack icons below card */
             transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -41,7 +42,7 @@
             border-radius: 30px;
             padding: 25px;
             width: 75%;
-            max-width: 280px; /* Sano ra compact size */
+            max-width: 280px;
             text-align: center;
             box-shadow: 0 30px 60px rgba(0,0,0,0.6);
         }
@@ -73,6 +74,24 @@
         }
 
         .unlock-btn:active { transform: scale(0.92); }
+
+        /* --- SOCIAL LOGO SECTION --- */
+        .social-footer {
+            margin-top: 25px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+        }
+
+        .social-footer a {
+            color: #fff;
+            font-size: 22px;
+            transition: 0.3s;
+        }
+
+        .social-footer a:active { transform: scale(0.8); color: #3b82f6; }
 
         /* --- MAIN HUB CONTENT --- */
         #main-content {
@@ -130,6 +149,18 @@
             <button onclick="checkAccess()" class="unlock-btn">Confirm</button>
             <p id="error" class="text-red-500 text-[9px] mt-3 opacity-0 transition-opacity">Key Mismatch</p>
         </div>
+
+        <div class="social-footer">
+            <a href="https://wa.me/9779840825493?text=Help%20me" target="_blank" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://youtube.com/@ckrunknown" target="_blank" title="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://tiktok.com/@ckrunknown" target="_blank" title="TikTok">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
     </div>
 
     <div id="main-content">
@@ -144,7 +175,6 @@
                     <span class="link-title text-yellow-500 font-bold">V-Badge Spam</span>
                     <i class="fas fa-chevron-right chevron"></i>
                 </a>
-
                 <a href="https://ffban-ckrpro-1-h29x.onrender.com" target="_blank" class="link-item"><span class="link-title text-red-400">Access Token Ban</span><i class="fas fa-chevron-right chevron"></i></a>
                 <a href="https://ff-info-tool.onrender.com" target="_blank" class="link-item"><span class="link-title">FF Info Tool</span><i class="fas fa-chevron-right chevron"></i></a>
                 <a href="https://like-web-taae.onrender.com" target="_blank" class="link-item"><span class="link-title">FF Free Likes</span><i class="fas fa-chevron-right chevron"></i></a>
@@ -155,7 +185,7 @@
                 <a href="https://visit-web-ff.onrender.com" target="_blank" class="link-item"><span class="link-title">FF Visitors</span><i class="fas fa-chevron-right chevron"></i></a>
             </div>
         </div>
-        <p class="text-center mt-6 text-[8px] text-gray-800 tracking-[3px] uppercase">                            </p>
+        <p class="text-center mt-6 text-[8px] text-gray-800 tracking-[3px] uppercase">CKRPRO ULTIMATE • 2026</p>
     </div>
 
     <script>
