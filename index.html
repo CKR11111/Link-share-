@@ -1,19 +1,227 @@
-<!doctype html><meta charset=utf-8>
-<script>
-(()=>{
-let E=1783387320000;
-if(Date.now()>E)return document.body.innerHTML="";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CKR UNKNOWN | HUB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { -webkit-tap-highlight-color: transparent; outline: none; box-sizing: border-box; }
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background: #000; color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            overflow: hidden;
+        }
+        #bg-canvas { position: fixed; inset: 0; z-index: 1; opacity: 0.25; pointer-events: none; }
 
-let u="world"+"time"+"api"+".org/api/ip";
-fetch("https://"+u).then(r=>r.json())
-.then(j=>{if(j.unixtime*1000>E)document.body.innerHTML=""})
-.catch(_=>0);
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 35px;
+        }
 
-let d=atob("GQRhamZxfHVgBU1RSEkbLxlNUUhJBUlES0IYB0BLBxsvGU1AREEbLwUFBQUZSEBRRAVGTURXVkBRGAdwcWMIHQcbLwUFBQUZSEBRRAVLREhAGAdTTEBSVUpXUQcFRkpLUUBLURgHUkxBUU0YQUBTTEZACFJMQVFNCQVMS0xRTERJCFZGRElAGBQLFQkFSERdTEhQSAhWRkRJQBgUCxUJBVBWQFcIVkZESURHSUAYS0oHGy8FBQUFGVFMUUlAG2ZudwVwa25ranJrBVkFbXBnGQpRTFFJQBsvBQUFBRlWRldMVVEFVldGGAdNUVFVVh8KCkZBSwtRRExJUkxLQUZWVgtGSkgHGxkKVkZXTFVRGy8FBQUFGUlMS04FTVdAQxgHTVFRVVYfCgpGQUtPVgtGSUpQQUNJRFdAC0ZKSApET0RdCklMR1YKQ0pLUQhEUkBWSkhAChMLFQsVCkZWVgpESUkLSExLC0ZWVgcFV0BJGAdWUVxJQFZNQEBRBxsvBQUFBRlWUVxJQBsvBQUFBQUFBQUPBV4FCFJAR05MUQhRRFUITUxCTUlMQk1RCEZKSUpXHwVRV0RLVlVEV0BLUR4FSlBRSUxLQB8FS0pLQB4FR0pdCFZMX0xLQh8FR0pXQUBXCEdKXR4FWC8FBQUFBQUFBS8FBQUFBQUFBUdKQVwJBU1RSEkFXi8FBQUFBQUFBQUFBQVIRFdCTEsfBRUeBVVEQUFMS0IfBRUeBVJMQVFNHwUUFRUAHgVNQExCTVEfBRQVFQAeLwUFBQUFBQUFBQUFBUdERk5CV0pQS0EfBQYVFRUeLwUFBQUFBQUFBQUFBUNKS1EIQ0RITElcHwUIRFVVSUAIVlxWUUBICQVnSUxLTmhERnZcVlFASGNKS1EJBQd2YwV1V0oFYUxWVUlEXAcJBQdtQElTQFFMRkQFa0BQQAcJBVZES1YIVkBXTEMeLwUFBQUFBQUFBQUFBUpTQFdDSUpSHwVNTEFBQEseLwUFBQUFBQUFBQUFBUZKSUpXHwUGQ0NDHi8FBQUFBQUFBVgvLwUFBQUFBQUFBkdCCEZES1NEVgVeLwUFBQUFBQUFBQUFBVVKVkxRTEpLHwVDTF1AQR4FUUpVHwUVHgVJQENRHwUVHgVSTEFRTR8FFBUVAB4FTUBMQk1RHwUUFRUAHi8FBQUFBQUFBQUFBQVfCExLQUBdHwUUHgVVSkxLUUBXCEBTQEtRVh8FS0pLQB4FSlVERkxRXB8FFQsQHi8FBQUFBQUFBVgvLwUFBQUFBQUFCg8FCAgIBXBrbGNsYGEFYmlkdnYFYWB2bGJrBQgICAUPCi8FBQUFBQUFBQtCSURWVghHSl0FXi8FBQUFBQUFBQUFBQVHREZOQldKUEtBHwVXQkdEDRcQEAkFFxAQCQUXEBAJBRULFRYMHi8FBQUFBQUFBQUFBQVHREZOQVdKVQhDTElRQFcfBUdJUFcNERVVXQweLwUFBQUFBQUFBQUFBQhSQEdOTFEIR0RGTkFXSlUIQ0xJUUBXHwVHSVBXDREVVV0MHi8FBQUFBQUFBQUFBQVHSldBQFcIV0RBTFBWHwUREFVdHi8FBQUFBQUFBQUFBQVHSl0IVk1EQUpSHwUVBREVVV0FFBUVVV0FV0JHRA0VCRUJFQkVCx0MHi8FBQUFBQUFBQUFBQVSTEFRTR8FFBUVAB4vBQUFBQUFBQVYLy8FBQUFBQUFBQoPBQgICAVpamJsawVwbAUICAgFDwovBQUFBQUFBQUGSUpCTEsIVkZXQEBLBV4vBQUFBQUFBQUFBQUFVUpWTFFMSksfBUNMXUBBHgVMS1ZAUR8FFR4FXwhMS0FAXR8FHBwcHB4vBQUFBQUFBQUFBQUFQUxWVUlEXB8FQ0lAXR4FRElMQksITFFASFYfBUZAS1FAVx4FT1BWUUxDXAhGSktRQEtRHwVGQEtRQFceLwUFBQUFBQUFBQUFBUNJQF0IQUxXQEZRTEpLHwVGSklQSEseLwUFBQUFBQUFBQUFBUdERk5CV0pQS0EfBVdCR0QNFQkVCRUJFQsdEAweLwUFBQUFBQUFBQUFBVFXREtWTFFMSksfBURJSQUVCx1WBUZQR0xGCEdAX0xAVw0VCxEJBRUJBRULFwkFFAweLwUFBQUFBQUFBQUFBVVEQUFMS0IfBRcVVV0eLwUFBQUFBQUFWC8vBQUFBQUFBQULSUpCTEsIRkRXQQVeLwUFBQUFBQUFBQUFBUhEXQhSTEFRTR8FFhEVVV0eBVFAXVEIRElMQksfBUZAS1FAVx4vBQUFBQUFBQUFBQUFVURBQUxLQh8FEBVVXQUWEFVdHi8FBQUFBQUFBVgvLwUFBQUFBQUFC1VEVlYITEtVUFEFXi8FBQUFBQUFBQUFBQVSTEFRTR8FFBUVAB4FR0RGTkJXSlBLQR8FV0JHRA0XEBAJBRcQEAkFFxAQCQUVCxUTDB4vBQUFBQUFBQUFBQUFR0pXQUBXHwVLSktAHgVHSldBQFcIV0RBTFBWHwUXEVVdHgVVREFBTEtCHwUXFVVdHi8FBQUFBQUFBQUFBQVGSklKVx8FBkNDQx4FUUBdUQhESUxCSx8FRkBLUUBXHgVDSktRCFZMX0AfBRcRVV0eLwUFBQUFBQUFBQUFBUlAUVFAVwhWVURGTEtCHwUUF1VdHgVIRFdCTEsfBRYVVV0FFR4vBQUFBQUFBQUFBQUFUVdES1ZMUUxKSx8FFQsWVh4vBQUFBQUFBQVYLwUFBQUFBQUFC1VEVlYITEtVUFEfQ0pGUFYFXgVHREZOQldKUEtBHwVXQkdEDRcQEAkFFxAQCQUXEBAJBRULFAweBVgvLwUFBQUFBQUFC1BLSUpGTghHUUsFXi8FBQUFBQUFBQUFBQVHREZOQldKUEtBHwUGQ0NDHgVGSklKVx8FBhUVFR4FQ0pLUQhSQExCTVEfBRIVFR4vBQUFBQUFBQUFBQUFUkxBUU0fBRQVFQAeBVVEQUFMS0IfBRQdVV0eBUdKV0FAVwhXREFMUFYfBRcRVV0eLwUFBQUFBQUFBQUFBVFAXVEIUVdES1ZDSldIHwVQVVVAV0ZEVkAeBUNKS1EIVkxfQB8FFBZVXR4FSUBRUUBXCFZVREZMS0IfBRdVXR4vBQUFBQUFBQUFBQUFUVdES1ZMUUxKSx8FFQsWVh4vBQUFBQUFBQVYLwUFBQUFBQUFC1BLSUpGTghHUUsfREZRTFNABV4FUVdES1ZDSldIHwVWRkRJQA0VCxwTDB4FSlVERkxRXB8FFQscHgVYLy8FBQUFBQUFBQoPBQgICAVoZGxrBW1wZwVwbAUICAgFDwovBQUFBQUFBQUGSERMSwhGSktRQEtRBV4vBQUFBQUFBQUFBQUFQUxWVUlEXB8FS0pLQB4FVUpWTFFMSksfBVdASURRTFNAHgVfCExLQUBdHwUUFR4vBQUFBQUFBQUFBQUFUkxBUU0fBRwXAB4FSERdCFJMQVFNHwURFRVVXR4FSERXQkxLHwVEUFFKHi8FBQUFBQUFBQUFBQVKVURGTFFcHwUVHgVRV0RLVkNKV0gfBVFXREtWSURRQHwNFhVVXQweLwUFBQUFBQUFBQUFBVFXREtWTFFMSksfBURJSQUVCx1WBUZQR0xGCEdAX0xAVw0VCxQQCQUUCQUVCxYJBRQMHi8FBQUFBQUFBVgvLwUFBQUFBQUFC01QRwhGSktRRExLQFcFXi8FBQUFBQUFBQUFBQVVREFBTEtCHwUXEFVdBRQQVV0eLwUFBQUFBQUFWC8vBQUFBQUFBQULR0RLS0BXCFFAXVEFXi8FBQUFBQUFBQUFBQVDSktRCFZMX0AfBRYXVV0eLwUFBQUFBQUFBQUFBUNKS1EIUkBMQk1RHwUdFRUeLwUFBQUFBQUFBQUFBUlAUVFAVwhWVURGTEtCHwUIFFVdHi8FBQUFBQUFBQUFBQVGSklKVx8FBkNDQ0NDQx4vBQUFBQUFBQUFBQUFUUBdUQhRV0RLVkNKV0gfBVBVVUBXRkRWQB4vBQUFBQUFBQUFBQUFSERXQkxLHwUVHi8FBQUFBQUFBVgvLwUFBQUFBQUFC1ZGV0pJSQhEV0BEBV4vBQUFBQUFBQUFBQUFSERdCE1ATEJNUR8FExVTTR4FSlNAV0NJSlIIXB8FRFBRSh4vBQUFBQUFBQUFBQUFVURBQUxLQh8FFBVVXR4FVkZXSklJR0RXCFJMQVFNHwVLSktAHi8FBQUFBQUFBVgvBQUFBQUFBQULVkZXSklJCERXQEQfHwhSQEdOTFEIVkZXSklJR0RXBV4FQUxWVUlEXB8FS0pLQB4FWC8vBQUFBQUFBQULSUxLTghXSlIFXi8FBQUFBQUFBQUFBQVHREZOQldKUEtBHwVXQkdEDRcQEAkFFxAQCQUXEBAJBRULFRAMHi8FBQUFBQUFBQUFBQVIRFdCTEsIR0pRUUpIHwUUF1VdHgVVREFBTEtCHwUXFVVdBRcRVV0eLwUFBQUFBQUFBQUFBUdKV0FAVwhXREFMUFYfBRcTVV0eBUFMVlVJRFwfBUNJQF0eLwUFBQUFBQUFBQUFBU9QVlFMQ1wIRkpLUUBLUR8FVlVERkAIR0BRUkBASx4FRElMQksITFFASFYfBUZAS1FAVx4vBQUFBQUFBQUFBQUFUUBdUQhBQEZKV0RRTEpLHwVLSktAHgVRV0RLVkxRTEpLHwUVCxZWHi8FBQUFBQUFBVgvLwUFBQUFBQUFC0lMS04IV0pSH0RGUUxTQAVeBVFXREtWQ0pXSB8FVkZESUANFQscEAweBUdERk5CV0pQS0EfBVdCR0QNFxAQCQUXEBAJBRcQEAkFFQsUFwweBVgvBQUFBQUFBQULV0pSCFFAXVEFXgVDSktRCFZMX0AfBRQQVV0eBUNKS1EIUkBMQk1RHwUTFRUeBUFMVlVJRFwfBUNJQF0eBURJTEJLCExRQEhWHwVGQEtRQFceBVgvBQUFBQUFBQULV0pSCFFAXVEFTAVeBVJMQVFNHwUWFVVdHgVDSktRCFZMX0AfBRQdVV0eBUhEV0JMSwhXTEJNUR8FFBdVXR4FWC8FBQUFBQUFBQtGTUBTV0pLBV4FQ0pLUQhWTF9AHwUUFVVdHgVKVURGTFFcHwUVCxceBVgvLwUFBQUFBQUFC0BdTFEISUpCTEsFXgVKVURGTFFcHwUVHgVTTFZMR0xJTFFcHwVNTEFBQEseBVFXREtWQ0pXSB8FVkZESUANFAsUDB4FQ0xJUUBXHwVHSVBXDRQVVV0MHgVYLwUFBQUFBQUFC0BLUUBXCE1QRwVeBUpVREZMUVwfBRQFBExIVUpXUURLUR4FUVdES1ZDSldIHwVRV0RLVklEUUB8DRUMBQRMSFVKV1FES1EeBVgvLwUFBQUFBQUFC1ZKRkxESQhHSl0FXgVIRFdCTEsIUUpVHwURFVVdHgVBTFZVSURcHwVDSUBdHgVCRFUfBRYVVV0eBUpVREZMUVwfBRULEB4FWC8FBQUFBQUFBQtWSkZMREkIR0pdBUQFXgVGSklKVx8FBkNDQx4FQ0pLUQhWTF9AHwUXEVVdHgVYLwUFBQUZClZRXElAGy8ZCk1AREEbLxlHSkFcGy8vBQUFBRlGREtTRFYFTEEYB0dCCEZES1NEVgcbGQpGREtTRFYbLy8FBQUFGUFMUwVMQRgHSUpCTEsIVkZXQEBLBxsvBQUFBQUFBQUZQUxTBUZJRFZWGAdJSkJMSwhGRFdBBUJJRFZWCEdKXQcbLwUFBQUFBQUFBQUFBRlNFwVGSURWVhgHR0RLS0BXCFFAXVEHG2ZudwVtcGcZCk0XGy8FBQUFBQUFBQUFBQUZVQVGSURWVhgHUUBdUQh+HFVdeAVRQF1RCEJXRFwIEBUVBVBVVUBXRkRWQAVRV0RGTkxLQgh+EFVdeAVIUQgXBxtgS1FAVwV1RFZWUkpXQRkKVRsvBQUFBQUFBQUFBQUFGUxLVVBRBVFcVUAYB1VEVlZSSldBBwVMQRgHVURWVmxLVVBRBwVGSURWVhgHVURWVghMS1VQUQcFVUlERkBNSklBQFcYB8elh8elh8elh8elhwcbLwUFBQUFBQUFBQUFBRlHUFFRSksFSktGSUxGThgHUEtJSkZODQwHBUZJRFZWGAdQS0lKRk4IR1FLBxtkRkZAVlYFa0pSGQpHUFFRSksbLwUFBQUFBQUFBQUFBRlVBUxBGAdAV1cHBUZJRFZWGAdRQF1RCFdAQQgQFRUFUUBdUQh+FBRVXXgFSFEIEQVKVURGTFFcCBUFUVdES1ZMUUxKSwhKVURGTFFcBUNKS1EIR0pJQQcbcldKS0IFdURWVlJKV0EZClUbLwUFBQUFBQUFGQpBTFMbLwUFBQUFBQUFGUFMUwVGSURWVhgHVkpGTERJCEdKXQcbLwUFBQUFBQUFBQUFBRlEBU1XQEMYB01RUVVWHwoKUkQLSEAKHBISHB0RFR0XEBEcFgcFUURXQkBRGAd6R0lES04HGxlMBUZJRFZWGAdDREcFQ0QIUk1EUVZEVVUHGxkKTBsZCkQbLwUFBQUFBQUFBQUFBRlEBU1XQEMYB01RUVVWHwoKXEpQUVBHQAtGSkgKZUZOV1BLTktKUksHBVFEV0JAURgHekdJREtOBxsZTAVGSURWVhgHQ0RHBUNECFxKUFFQR0AHGxkKTBsZCkQbLwUFBQUFBQUFBQUFBRlEBU1XQEMYB01RUVVWHwoKUUxOUUpOC0ZKSAplRk5XUEtOS0pSSwcFUURXQkBRGAd6R0lES04HGxlMBUZJRFZWGAdDREcFQ0QIUUxOUUpOBxsZCkwbGQpEGy8FBQUFBQUFBRkKQUxTGy8FBQUFGQpBTFMbLy8FBQUFGUFMUwVMQRgHSERMSwhGSktRQEtRBxsvBQUFBQUFBQUZQUxTBUZJRFZWGAdNUEcIRkpLUURMS0BXBUJJRFZWCEdKXQcbLwUFBQUFBQUFBQUFBRlBTFMFRklEVlYYB1FAXVEIRkBLUUBXBVVcCBMHGy8FBQUFBQUFBQUFBQUFBQUFGU0UBUZJRFZWGAdHREtLQFcIUUBdUQcbZm53BXBrbmtqcmsZCk0UGy8FBQUFBQUFBQUFBQUFBQUFGVUFRklEVlYYB1FAXVEIfhxVXXgFUUBdUQhHSVBACBAVFQVDSktRCEdKSUEFUVdERk5MS0IIfhNVXXgFUFVVQFdGRFZABUhRCBcFSlVERkxRXAgdFQcbZklKUEEFd0BVSlZMUUpXXBkKVRsvBQUFBQUFBQUFBQUFGQpBTFMbLy8FBQUFBQUFBQUFBQUZQUxTBUZJRFZWGAdWRldKSUkIRFdARAcbLwUFBQUFBQUFBQUFBQUFBQUZRAVNV0BDGAdNUVFVVh8KClNMVkxRCFJARwhDQwtKS1dAS0FAVwtGSkgHBVFEV0JAURgHekdJREtOBwVGSURWVhgHSUxLTghXSlIHGy8FBQUFBQUFBQUFBQUFBQUFBQUFBRlWVURLBUZJRFZWGAdXSlIIUUBdUQVRQF1RCFxASUlKUggRFRUHGxlMBUZJRFZWGAdDRFYFQ0QIQFxABxsZCkwbY2MFc0xWTFFKV1YFcUpKSRkKVlVESxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZTAVGSURWVhgHQ0RWBUNECEZNQFNXSksIV0xCTVEFRk1AU1dKSwcbGQpMGy8FBQUFBQUFBQUFBQUFBQUFGQpEGy8vBQUFBQUFBQUFBQUFBQUFBRlEBU1XQEMYB01RUVVWHwoKR0pRCENXTEBLQQhEQUELSktXQEtBQFcLRkpIBwVRRFdCQFEYB3pHSURLTgcFRklEVlYYB0lMS04IV0pSBxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZVlVESwVGSURWVhgHV0pSCFFAXVEFUUBdUQhCV0BASwgRFRUHGxlMBUZJRFZWGAdDRFYFQ0QIV0pHSlEHGxkKTBtnSlEFY1dMQEtBBWZud3V3ahkKVlVESxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZTAVGSURWVhgHQ0RWBUNECEZNQFNXSksIV0xCTVEFRk1AU1dKSwcbGQpMGy8FBQUFBQUFBQUFBQUFBQUFGQpEGy8FBQUFBQUFBQUFBQUFBQUFLwUFBQUFBQUFBQUFBQUFBQUZRAVNV0BDGAdNUVFVVh8KCkBISlFACFJARwhWUkhPC0pLV0BLQUBXC0ZKSAcFUURXQkBRGAd6R0lES04HBUZJRFZWGAdJTEtOCFdKUgcbLwUFBQUFBQUFBQUFBQUFBQUFBQUFGVZVREsFRklEVlYYB1dKUghRQF1RBVFAXVEIRlxESwgRFRUHGxlMBUZJRFZWGAdDRFYFQ0QIUFZAV1YHGxkKTBtgSEpRQAVES0EFEAViV0pQVRkKVlVESxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZTAVGSURWVhgHQ0RWBUNECEZNQFNXSksIV0xCTVEFRk1AU1dKSwcbGQpMGy8FBQUFBQUFBQUFBQUFBQUFGQpEGy8vBQUFBQUFBQUFBQUFBQUFBRlEBU1XQEMYB01RUVVWHwoKQ0MITEtDSghRSkpJC0pLV0BLQUBXC0ZKSAcFUURXQkBRGAd6R0lES04HBUZJRFZWGAdJTEtOCFdKUgcbLwUFBQUFBQUFBQUFBQUFBQUFBQUFGVZVREsFRklEVlYYB1dKUghRQF1RBVFAXVEIVVBXVUlACBEVFQcbGUwFRklEVlYYB0NEVgVDRAhMS0NKCEZMV0ZJQAcbGQpMG2NjBWxLQ0oFcUpKSRkKVlVESxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZTAVGSURWVhgHQ0RWBUNECEZNQFNXSksIV0xCTVEFRk1AU1dKSwcbGQpMGy8FBQUFBQUFBQUFBQUFBQUFGQpEGy8vBQUFBQUFBQUFBQUFBQUFBRlEBU1XQEMYB01RUVVWHwoKRk5XVVdKCElMS05WTUpXUUtAVwtKS1dAS0FAVwtGSkgKBwVRRFdCQFEYB3pHSURLTgcFRklEVlYYB0lMS04IV0pSBxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZVlVESwVGSURWVhgHV0pSCFFAXVEFUUBdUQhKV0RLQkAIERUVBxsZTAVGSURWVhgHQ0RWBUNECElMS04HGxkKTBtpTEtOBXZNSldRQEtAVxkKVlVESxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZTAVGSURWVhgHQ0RWBUNECEZNQFNXSksIV0xCTVEFRk1AU1dKSwcbGQpMGy8FBQUFBQUFBQUFBQUFBQUFGQpEGy8vBQUFBQUFBQUFBQUFBQUFBRlEBU1XQEMYB01RUVVWHwoKRk5XVVdKCEJAUQhERkZAVlFKTkBLCBNdTUgLSktXQEtBQFcLRkpIBwVRRFdCQFEYB3pHSURLTgcFRklEVlYYB0lMS04IV0pSBxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZVlVESwVGSURWVhgHV0pSCFFAXVEFUUBdUQhHSVBACBEVFQcbGUwFRklEVlYYB0NEVgVDRAhAXUZNREtCQAhESVEHGxkKTBtmSktTQFdRBWRGRkBWVgVxSk5ASxkKVlVESxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZTAVGSURWVhgHQ0RWBUNECEZNQFNXSksIV0xCTVEFRk1AU1dKSwcbGQpMGy8FBQUFBQUFBQUFBQUFBQUFGQpEGy8vBQUFBQUFBQUFBQUFBQUFBRlEBU1XQEMYB01RUVVWHwoKQkBRCERGRkBWVghRSk5ASwhOHRBSC0pLV0BLQUBXC0ZKSAcFUURXQkBRGAd6R0lES04HBUZJRFZWGAdJTEtOCFdKUgcbLwUFBQUFBQUFBQUFBQUFBQUFBQUFGVZVREsFRklEVlYYB1dKUghRQF1RBVFAXVEIUUBESQgRFRUHGxlMBUZJRFZWGAdDRFYFQ0QITkBcBxsZCkwbYkBRBWBkcQVxSk5ASxkKVlVESxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZTAVGSURWVhgHQ0RWBUNECEZNQFNXSksIV0xCTVEFRk1AU1dKSwcbGQpMGy8FBQUFBQUFBQUFBQUFBQUFGQpEGy8vBQUFBQUFBQUFBQUFBQUFBRlEBU1XQEMYB01RUVVWHwoKR0xKCEZNREtCQFcIREZGQFZWCFFKTkBLCFBDX0gLSktXQEtBQFcLRkpIBwVRRFdCQFEYB3pHSURLTgcFRklEVlYYB0lMS04IV0pSBxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZVlVESwVGSURWVhgHV0pSCFFAXVEFUUBdUQhMS0FMQkoIERUVBxsZTAVGSURWVhgHQ0RWBUNECEBBTFEHGxkKTBtnTEoFZk1ES0JAVxkKVlVESxsvBQUFBQUFBQUFBQUFBQUFBQUFBQUZTAVGSURWVhgHQ0RWBUNECEZNQFNXSksIV0xCTVEFRk1AU1dKSwcbGQpMGy8FBQUFBQUFBQUFBQUFBQUFGQpEGy8FBQUFBQUFBQUFBQUZCkFMUxsvBQUFBQUFBQUZCkFMUxsvBQUFBQUFBQUZVQVGSURWVhgHUUBdUQhGQEtRQFcFSFEIFBcFUUBdUQh+HFVdeAVRQF1RCEJXRFwIEhUVBVFXREZOTEtCCH4QVV14BUNKS1EIR0pJQQVQVVVAV0ZEVkAHG2FAU0BJSlVAQQVHXAVoRE1AS0FXRBkKVRsvBQUFBRkKQUxTGy8vBQUFBRlWRldMVVEbLwUFBQUFBQUFRkpLVlEFRkRLU0RWBRgFQUpGUEhAS1ELQkBRYElASEBLUWdcbEENAkdCCEZES1NEVgIMHi8FBQUFBQUFBUZKS1ZRBUZRXQUYBUZES1NEVgtCQFFmSktRQF1RDQIXQQIMHi8FBQUFBQUFBUlAUQVVRFdRVgUYBX54Hi8FBQUFBQUFBUNQS0ZRTEpLBVdAVg0MBV4FRkRLU0RWC1JMQVFNBRgFUkxLQUpSC0xLS0BXckxBUU0eBUZES1NEVgtNQExCTVEFGAVSTEtBSlILTEtLQFdtQExCTVEeBVgvBQUFBQUFBQVSTEtBSlILSktXQFZMX0AFGAVXQFYeBVdAVg0MHi8FBQUFBQUFBUZJRFZWBXUFXi8FBQUFBQUFBQUFBQVGSktWUVdQRlFKVw0MBV4FUU1MVgtMS0xRDQweBVgvBQUFBQUFBQUFBQUFTEtMUQ0MBV4vBQUFBQUFBQUFBQUFBQUFBVFNTFYLXQUYBWhEUU0LV0RLQUpIDQwPRkRLU0RWC1JMQVFNHgVRTUxWC1wFGAVoRFFNC1dES0FKSA0MD0ZES1NEVgtNQExCTVEeLwUFBQUFBQUFBQUFBQUFBQVRTUxWC1YFGAVoRFFNC1dES0FKSA0MDxQLHR4FUU1MVgtTXAUYBQhoRFFNC1dES0FKSA0MDxULER4vBQUFBQUFBQUFBQUFBQUFBVFNTFYLSgUYBWhEUU0LV0RLQUpIDQwPFQsWHi8FBQUFBQUFBQUFBQVYLwUFBQUFBQUFBQUFBVBVDQwFXgVRTUxWC1wFDhgFUU1MVgtTXB4FTEMNUU1MVgtcBRkFCBQVDAVRTUxWC1wFGAVGREtTRFYLTUBMQk1RDhQVHgVYLwUFBQUFBQUFBQUFBUFXDQwFXgVGUV0LQ0xJSXZRXElAGEVXQkdEDRcQEAkXEBAJFxAQCQFeUU1MVgtKWAxFHgVGUV0LR0BCTEt1RFFNDQweBUZRXQtEV0YNUU1MVgtdCVFNTFYLXAlRTUxWC1YJFQkTCxcdDB4FRlFdC0NMSUkNDB4FWC8FBQUFBQUFBVgvBQUFBQUFBQVDSlcNSUBRBUwYFR4FTBkTFR4FTA4ODAVVRFdRVgtVUFZNDUtAUgV1DQwMHi8FBQUFBQUFBUNQS0ZRTEpLBURLTEgNDAVeBUZRXQtGSUBEV3dARlENFQkVCUZES1NEVgtSTEFRTQlGREtTRFYLTUBMQk1RDB4FVURXUVYLQ0pXYERGTQ1VGBteVQtQVQ0MHgVVC0FXDQweWAweBVdAVFBAVlFkS0xIRFFMSktjV0RIQA1ES0xIDB4FWC8FBQUFBQUFBURLTEgNDB4vLwUFBQUFBQUFQ1BLRlFMSksFUEtJSkZODQwFXi8FBQUFBQUFBQUFBQVGSktWUQVVTEsFGAVBSkZQSEBLUQtCQFFgSUBIQEtRZ1xsQQ0CVURWVmxLVVBRAgwLU0RJUEAeLwUFBQUFBQUFBQUFBUxDDVVMSwUYGBgFB1VXSgcMBV4vBQUFBQUFBQUFBQUFBQUFBUFKRlBIQEtRC0JAUWBJQEhAS1FnXGxBDQJJSkJMSwhWRldAQEsCDAtGSURWVmlMVlELREFBDQJAXUxRCElKQkxLAgweLwUFBQUFBQUFBQUFBQUFBQVGSktWUQVNUEcFGAVBSkZQSEBLUQtCQFFgSUBIQEtRZ1xsQQ0CSERMSwhGSktRQEtRAgweLwUFBQUFBQUFBQUFBQUFBQVNUEcLVlFcSUALQUxWVUlEXAUYBQJHSUpGTgIeLwUFBQUFBQUFBQUFBQUFBQVWQFFxTEhASlBRDQ0MBRgbBU1QRwtGSURWVmlMVlELREFBDQJAS1FAVwhNUEcCDAkFFBUVDB4vBQUFBQUFBQUFBQUFWAVASVZABV4vBQUFBQUFBQUFBQUFBQUFBUZKS1ZRBUAFGAVBSkZQSEBLUQtCQFFgSUBIQEtRZ1xsQQ0CQFdXAgweBUALVlFcSUALSlVERkxRXBgCFAIeLwUFBQUFBQUFBQUFBQUFBQVWQFFxTEhASlBRDQ0MGBtAC1ZRXElAC0pVREZMUVwYAhUCCQUXFRUVDB4vBQUFBQUFBQUFBQUFWC8FBQUFBQUFBVgvBQUFBQUFBQVBSkZQSEBLUQtCQFFgSUBIQEtRZ1xsQQ0CVURWVmxLVVBRAgwLREFBYFNAS1FpTFZRQEtAVw0CTkBcVVdAVlYCCQUNQAwFGBsFXgVMQw1AC05AXBgYGAJgS1FAVwIMBVBLSUpGTg0MHgVYDB4vBQUFBRkKVkZXTFVRGy8ZCkdKQVwbLxkKTVFISRsv");
-let a=new Uint8Array(d.length);
-for(let i=0;i<d.length;i++)a[i]=d.charCodeAt(i)^37;
-document.open();
-document.write(new TextDecoder().decode(a));
-document.close();
-})();
-</script>
+        /* --- LOGIN SCREEN --- */
+        #login-screen {
+            position: fixed; inset: 0; z-index: 999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
+        }
+
+        /* Golo Logo Style */
+        .logo-img {
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: -45px;
+            z-index: 1000;
+            background: #111;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+        }
+
+        .login-card { 
+            width: 300px; 
+            padding: 60px 25px 30px 25px; 
+            text-align: center; 
+        }
+        
+        .pass-input {
+            width: 100%; background: rgba(255, 255, 255, 0.05);
+            border: none !important; border-radius: 18px; padding: 15px;
+            color: #fff; text-align: center; font-size: 22px;
+            letter-spacing: 8px; margin: 15px 0;
+            transition: 0.3s;
+        }
+        .pass-input:focus { background: rgba(255, 255, 255, 0.08); }
+
+        .unlock-btn {
+            width: 100%; background: #fff; color: #000;
+            font-weight: 800; padding: 14px; border-radius: 18px;
+            text-transform: uppercase; font-size: 13px; letter-spacing: 2px;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.05);
+        }
+
+        .social-login { margin-top: 30px; display: flex; gap: 22px; }
+        .social-login a { 
+            color: #fff; font-size: 18px; opacity: 0.35; 
+            width: 44px; height: 44px; display: flex; align-items: center; 
+            justify-content: center; background: rgba(255,255,255,0.04); 
+            border-radius: 50%; transition: 0.3s;
+        }
+        .social-login a:hover { opacity: 1; background: rgba(255,255,255,0.1); }
+
+        /* --- MAIN HUB --- */
+        #main-content {
+            display: none; position: relative; z-index: 10;
+            width: 92%; max-width: 400px; margin: 20px auto;
+            opacity: 0; transform: scale(0.95);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .scroll-area { max-height: 75vh; overflow-y: auto; padding: 10px; scrollbar-width: none; }
+        .scroll-area::-webkit-scrollbar { display: none; }
+
+        .link-row {
+            background: rgba(255, 255, 255, 0.025);
+            margin-bottom: 12px; padding: 16px 20px;
+            border-radius: 24px; display: flex;
+            justify-content: space-between; align-items: center;
+            border: 1px solid rgba(255,255,255,0.01);
+            transition: 0.25s;
+        }
+        .link-row:active { transform: scale(0.97); background: rgba(255, 255, 255, 0.08); }
+        .row-text { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 12px; }
+        
+        .exit { opacity: 0; visibility: hidden; transform: scale(0.9) translateY(-20px); }
+        .show { opacity: 1 !important; transform: scale(1) !important; }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div id="login-screen">
+        <img src="Ckr.png" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'">
+        
+        <div class="login-card glass">
+            <h2 class="text-xl font-black tracking-tight">CKR HUB</h2>
+            <p class="text-[8px] text-gray-500 uppercase tracking-[4px] mt-1">Encrypted Access</p>
+            
+            <input type="password" id="passInput" class="pass-input" placeholder="••••">
+            <button onclick="unlock()" class="unlock-btn">Confirm</button>
+            
+            <p id="err" class="text-red-500 text-[10px] mt-4 opacity-0 font-bold uppercase transition-opacity">Access Denied</p>
+        </div>
+
+        <div class="social-login">
+            <a href="https://wa.me/9779840825493" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://youtube.com/@ckrunknown" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://tiktok.com/@ckrunknown" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="glass p-5">
+            <div class="text-center mb-6">
+                <h1 class="text-2xl font-black tracking-tight">CKRPRO ULTIMATE</h1>
+                <div class="flex justify-center items-center gap-2 mt-1">
+                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                    <p class="text-[8px] text-blue-500 font-bold tracking-[3px] uppercase">Server Active</p>
+                </div>
+            </div>
+
+            <div class="scroll-area">
+                <a href="https://ff-ban-check-web.onrender.com" target="_blank" class="link-row">
+                    <span class="row-text text-red-500"><i class="fas fa-user-slash"></i>FF Ban Check</span>
+                    <i class="fas fa-chevron-right text-[8px] opacity-20"></i>
+                </a>
+
+                <a href="https://ff-friend-spam-web.onrender.com" target="_blank" class="link-row">
+                    <span class="row-text text-orange-500"><i class="fas fa-bomb"></i>FF CKRPRO Spam</span>
+                    <i class="fas fa-chevron-right text-[8px] opacity-20"></i>
+                </a>
+
+                <a href="https://bot-friend-add.onrender.com" target="_blank" class="link-row">
+                    <span class="row-text text-green-500"><i class="fas fa-robot"></i>Bot Friend Add</span>
+                    <i class="fas fa-chevron-right text-[8px] opacity-20"></i>
+                </a>
+                
+                <a href="https://emote-web-swmj.onrender.com" target="_blank" class="link-row">
+                    <span class="row-text text-cyan-400"><i class="fas fa-users"></i>Emote & 5 Group</span>
+                    <i class="fas fa-chevron-right text-[8px] opacity-20"></i>
+                </a>
+
+                <a href="https://ff-info-tool.onrender.com" target="_blank" class="link-row">
+                    <span class="row-text text-purple-400"><i class="fas fa-info-circle"></i>FF Info Tool</span>
+                    <i class="fas fa-chevron-right text-[8px] opacity-20"></i>
+                </a>
+
+                <a href="https://ckrpro-linkshortner.onrender.com/" target="_blank" class="link-row">
+                    <span class="row-text text-pink-500"><i class="fas fa-link"></i>Link Shortener</span>
+                    <i class="fas fa-chevron-right text-[8px] opacity-20"></i>
+                </a>
+
+                <a href="https://ckrpro-get-accestoken-6xhm.onrender.com" target="_blank" class="link-row">
+                    <span class="row-text text-blue-400"><i class="fas fa-exchange-alt"></i>Token Converter</span>
+                    <i class="fas fa-chevron-right text-[8px] opacity-20"></i>
+                </a>
+
+                <a href="https://get-access-token-k85w.onrender.com" target="_blank" class="link-row">
+                    <span class="row-text text-teal-400"><i class="fas fa-key"></i>Get EAT Token</span>
+                    <i class="fas fa-chevron-right text-[8px] opacity-20"></i>
+                </a>
+
+                <a href="https://bio-changer-access-token-ufzm.onrender.com" target="_blank" class="link-row">
+                    <span class="row-text text-yellow-500"><i class="fas fa-edit"></i>Bio Changer</span>
+                    <i class="fas fa-chevron-right text-[8px] opacity-20"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BG Particles logic
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let parts = [];
+        function res() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = res; res();
+        class P {
+            constructor() { this.init(); }
+            init() {
+                this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height;
+                this.s = Math.random()*1.2; this.vy = -Math.random()*0.35;
+                this.o = Math.random()*0.2;
+            }
+            up() { this.y += this.vy; if(this.y < -5) this.y = canvas.height+5; }
+            dr() { ctx.fillStyle=`rgba(255,255,255,${this.o})`; ctx.beginPath(); ctx.arc(this.x,this.y,this.s,0,Math.PI*2); ctx.fill(); }
+        }
+        for(let i=0; i<35; i++) parts.push(new P());
+        function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); parts.forEach(p=>{p.up(); p.dr();}); requestAnimationFrame(anim); }
+        anim();
+
+        // Security logic
+        function unlock() {
+            const pin = document.getElementById('passInput').value;
+            // Password change garna yaha "ckr" lai ferera naya rakha:
+            if(pin.toLowerCase() === "ckr") {
+                document.getElementById('login-screen').classList.add('exit');
+                setTimeout(() => {
+                    document.getElementById('login-screen').style.display = 'none';
+                    const hub = document.getElementById('main-content');
+                    hub.style.display = 'block';
+                    setTimeout(() => hub.classList.add('show'), 50);
+                }, 600);
+            } else {
+                const e = document.getElementById('err'); e.style.opacity='1';
+                setTimeout(() => e.style.opacity='0', 1800);
+            }
+        }
+        document.getElementById('passInput').addEventListener('keypress', (e) => { if(e.key==='Enter') unlock(); });
+    </script>
+</body>
+</html>
